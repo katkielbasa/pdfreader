@@ -26,14 +26,24 @@ public class OutputWriter {
 
 	private String firstDebit(PDFParser parser) {
 		List<String[]> debits = parser.getDebits();
-		String firstDebit = debits.get(0)[0];
+		String firstDebit;
+		try {
+			firstDebit = debits.get(0)[0];
+		} catch (ArrayIndexOutOfBoundsException e) {
+			return "";
+		}
 		// System.out.println("debug first debit: " + firstDebit);
 		return firstDebit;
 	}
 
 	private String firstCredit(PDFParser parser) {
 		List<String[]> credits = parser.getCredits();
-		String firstCredit = credits.get(0)[0];
+		String firstCredit;
+		try {
+			firstCredit = credits.get(0)[0];
+		} catch (ArrayIndexOutOfBoundsException e) {
+			return "";
+		}
 		// System.out.println("debug first credit: "+ firstCredit);
 		return firstCredit;
 	}
@@ -73,8 +83,12 @@ public class OutputWriter {
 	// **this function can have more start scenarios in future, this one is for
 	// CSV*/
 	public void start() throws IOException {
-		
-		FileWriter fstream = new FileWriter("C:/Users/katkielbasa/pdf/out/PDFStatmentOUT.txt", true); //true tells to append data.
+
+		FileWriter fstream = new FileWriter("C:/Users/katkielbasa/pdf/out/PDFStatmentOUT.txt", true); // true
+																										// tells
+																										// to
+																										// append
+																										// data.
 		outfile = new BufferedWriter(fstream);
 		System.out.println(header());
 		outfile.write(header());
@@ -83,8 +97,8 @@ public class OutputWriter {
 
 	//
 	public void printRecord(PDFParser parser) throws IOException {
-		String record = q(parser.getFileName()) + ", " +q(parser.getCustomerNo())+", "+ q(firstBalance(parser)) + ", " + q(lastBalance(parser))
-							+ ", " + q(firstCredit(parser)) + ", " + q(firstDebit(parser)) + "\n";
+		String record = q(parser.getFileName()) + ", " + q(parser.getCustomerNo()) + ", " + q(firstBalance(parser))
+				+ ", " + q(lastBalance(parser)) + ", " + q(firstCredit(parser)) + ", " + q(firstDebit(parser)) + "\n";
 		System.out.println(record);
 		outfile.write(record);
 		outfile.newLine();

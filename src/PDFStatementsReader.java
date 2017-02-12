@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
 
 public class PDFStatementsReader {
@@ -11,8 +12,10 @@ public class PDFStatementsReader {
 		OutputWriter writer = new OutputWriter();
 		try {
 			writer.start();
-			final File folder = new File("C:/Users/katkielbasa/pdf");
-			for (final File fileEntry : folder.listFiles()) {
+			final File folder = new File(args[0]);
+			for (final File fileEntry : folder.listFiles(new FilenameFilter() { 
+                public boolean accept(File dir, String filename)
+                { return filename.endsWith(".pdf"); }})) {
 				if (fileEntry.isDirectory()) {
 					continue;
 				} else {
