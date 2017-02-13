@@ -7,9 +7,19 @@ import java.util.List;
 public class OutputWriter {
 
 	BufferedWriter outfile;
+	private String outFileName;
 
-	public OutputWriter() {
+	public OutputWriter(String _outFile) {
+		outFileName = _outFile;
 
+	}
+
+	public String getOutFileName() {
+		return outFileName;
+	}
+
+	public void setOutFileName(String outFileName) {
+		this.outFileName = outFileName;
 	}
 
 	private String firstBalance(PDFParser parser) {
@@ -84,11 +94,11 @@ public class OutputWriter {
 	// CSV*/
 	public void start() throws IOException {
 
-		FileWriter fstream = new FileWriter("C:/Users/katkielbasa/pdf/out/PDFStatmentOUT.txt", true); // true
-																										// tells
-																										// to
-																										// append
-																										// data.
+		FileWriter fstream = new FileWriter(outFileName, true); // true
+																// tells
+																// to
+																// append
+																// data.
 		outfile = new BufferedWriter(fstream);
 		System.out.println(header());
 		outfile.write(header());

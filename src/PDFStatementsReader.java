@@ -9,7 +9,7 @@ public class PDFStatementsReader {
 	}
 
 	public static void main(String[] args) {
-		OutputWriter writer = new OutputWriter();
+		OutputWriter writer = new OutputWriter(args[1]);
 		try {
 			writer.start();
 			final File folder = new File(args[0]);
