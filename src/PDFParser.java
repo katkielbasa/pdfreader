@@ -67,11 +67,11 @@ public class PDFParser {
 
 	private void parseBalances() throws IOException {
 		Rectangle rect = new Rectangle(500, 0, 700, 800);
-		RenderFilter regionFilter = new RegionTextRenderFilter(rect);
-		TextExtractionStrategy strategy = new FilteredTextRenderListener(new LocationTextExtractionStrategy(),
-				regionFilter, fontFilter);	
+		RenderFilter regionFilter = new RegionTextRenderFilter(rect);	
 		balances = new ArrayList<String[]>();
 		for (int i = 1; i <= reader.getNumberOfPages(); i++) {
+			TextExtractionStrategy strategy = new FilteredTextRenderListener(new LocationTextExtractionStrategy(),
+					regionFilter, fontFilter);
 			String balance = PdfTextExtractor.getTextFromPage(reader, i, strategy);
 			balances.add(balance.split("\\s"));
 		}
@@ -79,11 +79,11 @@ public class PDFParser {
 
 	private void parseDebits() throws IOException {
 		Rectangle rect = new Rectangle(300, 0, 400, 800);
-		RenderFilter regionFilter = new RegionTextRenderFilter(rect);
-		TextExtractionStrategy strategy = new FilteredTextRenderListener(new LocationTextExtractionStrategy(),
-				regionFilter, fontFilter);	
+		RenderFilter regionFilter = new RegionTextRenderFilter(rect);	
 		debits = new ArrayList<String[]>();
 		for (int i = 1; i <= reader.getNumberOfPages(); i++) {
+			TextExtractionStrategy strategy = new FilteredTextRenderListener(new LocationTextExtractionStrategy(),
+					regionFilter, fontFilter);
 			String debit = PdfTextExtractor.getTextFromPage(reader, i, strategy);
 			debits.add(debit.split("\\s"));
 		}
@@ -91,11 +91,11 @@ public class PDFParser {
 
 	private void parseCredits() throws IOException {
 		Rectangle rect = new Rectangle(400, 0, 500, 800);
-		RenderFilter regionFilter = new RegionTextRenderFilter(rect);
-		TextExtractionStrategy strategy = new FilteredTextRenderListener(new LocationTextExtractionStrategy(),
-				regionFilter, fontFilter);	
+		RenderFilter regionFilter = new RegionTextRenderFilter(rect);	
 		credits = new ArrayList<String[]>();
 		for (int i = 1; i <= reader.getNumberOfPages(); i++) {
+			TextExtractionStrategy strategy = new FilteredTextRenderListener(new LocationTextExtractionStrategy(),
+					regionFilter, fontFilter);
 			String credit = PdfTextExtractor.getTextFromPage(reader, i, strategy);
 			credits.add(credit.split("\\s"));
 		}

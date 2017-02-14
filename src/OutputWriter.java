@@ -24,9 +24,7 @@ public class OutputWriter {
 
 	private String firstBalance(PDFParser parser) {
 		List<String[]> balances = parser.getBalances();
-		String firstBalance = balances.get(0)[0];
-		// System.out.println("debug first balance: " + firstBalance);
-		return firstBalance;
+		return balanceFromFirstPage(balances);
 	}
 
 	private String lastBalance(PDFParser parser) {
@@ -56,6 +54,25 @@ public class OutputWriter {
 		}
 		// System.out.println("debug first credit: "+ firstCredit);
 		return firstCredit;
+	}
+
+	private String balanceFromFirstPage(List<String[]> pages) {
+		String[] page = pages.get(0);
+		String firstBalance;
+		if ((firstBalance = firstNotEmpty(page)) != null) {
+			return firstBalance;
+		}
+
+		return null;
+	}
+
+	private String firstNotEmpty(String[] balances) {
+		for (int i = 0; i <= balances.length - 1; i++) {
+			if (balances[i] != "" && balances[i] != null && balances[i].trim().length() > 0) {
+				return balances[i];
+			}
+		}
+		return null;
 	}
 
 	private String balanceFromLastPage(List<String[]> pages) {
